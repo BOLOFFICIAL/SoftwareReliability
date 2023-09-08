@@ -6,7 +6,6 @@ namespace Laba1
     public partial class Form1 : Form
     {
         private int successfulTrials = 0;
-        private static Random random = new Random();
 
         public Form1()
         {
@@ -15,6 +14,8 @@ namespace Laba1
 
         private void button_Test_Click(object sender, EventArgs e)
         {
+            Random random = new Random();
+            successfulTrials = 0;
             if (!CheckInput())
                 return;
 
@@ -40,8 +41,7 @@ namespace Laba1
                 }
             }
 
-            double frequency = (double)successfulTrials / Steps;
-            textBox_Frequency.Text = frequency.ToString();
+            textBox_Frequency.Text = ((double)successfulTrials / Steps).ToString();
 
             if (radioButton_Independent.Checked)
             {
