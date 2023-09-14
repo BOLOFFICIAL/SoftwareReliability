@@ -1,11 +1,8 @@
-using System;
-using System.Windows.Forms;
-
 namespace Laba1
 {
     public partial class Form1 : Form
     {
-        private int successfulTrials = 0;
+        private int successfulTrialsCount = 0;
 
         public Form1()
         {
@@ -14,42 +11,51 @@ namespace Laba1
 
         private void button_Test_Click(object sender, EventArgs e)
         {
-            Random random = new Random();
-            successfulTrials = 0;
             if (!CheckInput())
                 return;
 
-            double A = double.Parse(textBox_ProbabilityA.Text);
-            double B = double.Parse(textBox_ProbabilityB.Text);
-            double C = double.Parse(textBox_ProbabilityC.Text);
-            int Steps = (int)numericUpDown_Steps.Value;
+            double probabilityA = double.Parse(textBox_ProbabilityA.Text);
+            double probabilityB = double.Parse(textBox_ProbabilityB.Text);
+            double probabilityC = double.Parse(textBox_ProbabilityC.Text);
+            int steps = (int)numericUpDown_Steps.Value;
 
-            for (int i = 0; i < Steps; i++)
+            Random random = new Random();
+            successfulTrialsCount = 0;
+
+            for (int i = 0; i < steps; i++)
             {
-                bool eventA = random.NextDouble() < A;
-                bool eventB = random.NextDouble() < B;
-                bool eventC = random.NextDouble() < C;
+                bool isSuccess = false;
 
-                if (radioButton_Independent.Checked && eventA && eventB && eventC)
+                if (radioButton_Independent.Checked)
                 {
-                    successfulTrials++;
+                    bool eventA = random.NextDouble() < probabilityA;
+                    bool eventB = random.NextDouble() < probabilityB;
+                    bool eventC = random.NextDouble() < probabilityC;
+
+                    isSuccess = eventA && eventB && eventC;
+                }
+                else if (radioButton_Incompatible.Checked)
+                {
+                    double eventD = random.NextDouble();
+
+                    isSuccess = (eventD <= probabilityA) || (eventD > probabilityA && eventD <= probabilityA + probabilityB) || (eventD > probabilityA + probabilityB && eventD <= probabilityA + probabilityB + probabilityC);
                 }
 
-                if (radioButton_Incompatible.Checked && (eventA || eventB || eventC))
+                if (isSuccess)
                 {
-                    successfulTrials++;
+                    successfulTrialsCount++;
                 }
             }
 
-            textBox_Frequency.Text = ((double)successfulTrials / Steps).ToString();
+            textBox_Frequency.Text = ((double)successfulTrialsCount / steps).ToString();
 
             if (radioButton_Independent.Checked)
             {
-                textBox_Probability.Text = (A * B * C).ToString();
+                textBox_Probability.Text = (probabilityA * probabilityB * probabilityC).ToString();
             }
             else if (radioButton_Incompatible.Checked)
             {
-                textBox_Probability.Text = (A + B + C).ToString();
+                textBox_Probability.Text = (probabilityA + probabilityB + probabilityC).ToString();
             }
         }
 
