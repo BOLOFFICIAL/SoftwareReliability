@@ -27,7 +27,6 @@ namespace Laba1
             {
 
                 bool isSuccess = false;
-
                 if (radioButton_Independent.Checked)
                 {
                     bool eventA = random.NextDouble() < probabilityA;
@@ -44,15 +43,12 @@ namespace Laba1
                         (eventD > probabilityA && eventD <= probabilityA + probabilityB) || 
                         (eventD > probabilityA + probabilityB && eventD <= probabilityA + probabilityB + probabilityC);
                 }
-
                 if (isSuccess)
                 {
                     successfulTrialsCount++;
                 }
             }
-
             textBox_Frequency.Text = ((double)successfulTrialsCount / steps).ToString();
-
             if (radioButton_Independent.Checked)
             {
                 textBox_Probability.Text = (
@@ -67,7 +63,6 @@ namespace Laba1
                 textBox_Probability.Text = (probabilityA + probabilityB + probabilityC).ToString();
             }
         }
-
         private bool CheckInput()
         {
             bool isValid = true;
@@ -80,13 +75,11 @@ namespace Laba1
                 MessageBox.Show("Вероятности A, B, C должны быть числами.");
                 isValid = false;
             }
-
             if (probabilities[0] < 0 || probabilities[1] < 0 || probabilities[2] < 0)
             {
                 MessageBox.Show("Вероятности не могут быть меньше 0.");
                 isValid = false;
             }
-
             if (radioButton_Independent.Checked)
             {
                 if (probabilities[0] > 1 || probabilities[1] > 1 || probabilities[2] > 1)
@@ -100,7 +93,6 @@ namespace Laba1
                 MessageBox.Show("Сумма вероятностей не может быть больше 1.");
                 isValid = false;
             }
-
             return isValid;
         }
     }
