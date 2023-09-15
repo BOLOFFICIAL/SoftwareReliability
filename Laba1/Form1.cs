@@ -19,11 +19,13 @@ namespace Laba1
             double probabilityC = double.Parse(textBox_ProbabilityC.Text);
             int steps = (int)numericUpDown_Steps.Value;
 
-            Random random = new Random();
             successfulTrialsCount = 0;
+
+            Random random = new Random();
 
             for (int i = 0; i < steps; i++)
             {
+
                 bool isSuccess = false;
 
                 if (radioButton_Independent.Checked)
@@ -32,13 +34,15 @@ namespace Laba1
                     bool eventB = random.NextDouble() < probabilityB;
                     bool eventC = random.NextDouble() < probabilityC;
 
-                    isSuccess = eventA && eventB && eventC;
+                    isSuccess = eventA || eventB || eventC;
                 }
                 else if (radioButton_Incompatible.Checked)
                 {
                     double eventD = random.NextDouble();
 
-                    isSuccess = (eventD <= probabilityA) || (eventD > probabilityA && eventD <= probabilityA + probabilityB) || (eventD > probabilityA + probabilityB && eventD <= probabilityA + probabilityB + probabilityC);
+                    isSuccess = (eventD <= probabilityA) || 
+                        (eventD > probabilityA && eventD <= probabilityA + probabilityB) || 
+                        (eventD > probabilityA + probabilityB && eventD <= probabilityA + probabilityB + probabilityC);
                 }
 
                 if (isSuccess)
@@ -51,7 +55,12 @@ namespace Laba1
 
             if (radioButton_Independent.Checked)
             {
-                textBox_Probability.Text = (probabilityA * probabilityB * probabilityC).ToString();
+                textBox_Probability.Text = (
+                    probabilityA + probabilityB + probabilityC
+                    - probabilityA * probabilityB
+                    - probabilityA * probabilityC
+                    - probabilityC * probabilityB
+                    + probabilityA * probabilityB * probabilityC).ToString();
             }
             else if (radioButton_Incompatible.Checked)
             {
@@ -69,6 +78,12 @@ namespace Laba1
                 !double.TryParse(textBox_ProbabilityC.Text, out probabilities[2]))
             {
                 MessageBox.Show("Вероятности A, B, C должны быть числами.");
+                isValid = false;
+            }
+
+            if (probabilities[0] < 0 || probabilities[1] < 0 || probabilities[2] < 0)
+            {
+                MessageBox.Show("Вероятности не могут быть меньше 0.");
                 isValid = false;
             }
 
