@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.number_of_experiments = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.result = new System.Windows.Forms.Button();
-            this.number_of_experiments = new System.Windows.Forms.NumericUpDown();
-            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.failure_rate = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.number_of_experiments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.number_of_experiments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.failure_rate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,53 +69,31 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // label1
+            // chart
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 10);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Интенсивность отказа";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(3, 78);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(214, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Количество экспериментов";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // result
-            // 
-            this.result.BackColor = System.Drawing.Color.Green;
-            this.result.Dock = System.Windows.Forms.DockStyle.Top;
-            this.result.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.result.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.result.ForeColor = System.Drawing.SystemColors.Menu;
-            this.result.Location = new System.Drawing.Point(10, 146);
-            this.result.Margin = new System.Windows.Forms.Padding(10);
-            this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(200, 40);
-            this.result.TabIndex = 3;
-            this.result.Text = "Результат";
-            this.result.UseVisualStyleBackColor = false;
-            this.result.Click += new System.EventHandler(this.res_Click);
+            chartArea1.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea1);
+            this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chart.Location = new System.Drawing.Point(237, 3);
+            this.chart.Name = "chart";
+            this.tableLayoutPanel1.SetRowSpan(this.chart, 6);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Гистограмма";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Name = "Расчётный график";
+            this.chart.Series.Add(series1);
+            this.chart.Series.Add(series2);
+            this.chart.Size = new System.Drawing.Size(560, 444);
+            this.chart.TabIndex = 6;
+            this.chart.Text = "chart1";
             // 
             // number_of_experiments
             // 
             this.number_of_experiments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.number_of_experiments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.number_of_experiments.Location = new System.Drawing.Point(3, 107);
+            this.number_of_experiments.Location = new System.Drawing.Point(10, 107);
+            this.number_of_experiments.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.number_of_experiments.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -137,31 +115,55 @@
             0});
             this.number_of_experiments.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
-            // chart
+            // label1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea2);
-            this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chart.Location = new System.Drawing.Point(223, 3);
-            this.chart.Name = "chart";
-            this.tableLayoutPanel1.SetRowSpan(this.chart, 6);
-            series3.ChartArea = "ChartArea1";
-            series3.Name = "Гистограмма";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series4.Name = "Расчётный график";
-            this.chart.Series.Add(series3);
-            this.chart.Series.Add(series4);
-            this.chart.Size = new System.Drawing.Size(574, 444);
-            this.chart.TabIndex = 6;
-            this.chart.Text = "chart1";
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(3, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(228, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Интенсивность отказа";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(3, 78);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(228, 16);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Количество экспериментов";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // result
+            // 
+            this.result.BackColor = System.Drawing.Color.Green;
+            this.result.Dock = System.Windows.Forms.DockStyle.Top;
+            this.result.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.result.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.result.ForeColor = System.Drawing.SystemColors.Menu;
+            this.result.Location = new System.Drawing.Point(10, 146);
+            this.result.Margin = new System.Windows.Forms.Padding(10);
+            this.result.Name = "result";
+            this.result.Size = new System.Drawing.Size(214, 40);
+            this.result.TabIndex = 3;
+            this.result.Text = "Результат";
+            this.result.UseVisualStyleBackColor = false;
+            this.result.Click += new System.EventHandler(this.res_Click);
             // 
             // failure_rate
             // 
             this.failure_rate.AutoSize = true;
             this.failure_rate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.failure_rate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.failure_rate.Location = new System.Drawing.Point(3, 39);
+            this.failure_rate.Location = new System.Drawing.Point(10, 39);
+            this.failure_rate.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.failure_rate.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -193,8 +195,8 @@
             this.Text = "Form1";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.number_of_experiments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.number_of_experiments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.failure_rate)).EndInit();
             this.ResumeLayout(false);
 
