@@ -8,7 +8,7 @@ namespace Laba3
 {
     public partial class Form1 : Form
     {
-        private double _time = 0;        // Время
+        private double _time = 0;        // Время работы системы
         private double _failureRate = 0; // Интенсивность отказов
         private double _numberExperiments = 0; // Количество экспериментов
         private Random _random = new Random();
@@ -16,16 +16,17 @@ namespace Laba3
         public Form1()
         {
             InitializeComponent();
-            chart1.Series[0].Points.Clear();
-            chart1.Series[1].Points.Clear();
+            chart1.Series[0].Points.Clear(); // Очистка графика вероятностей
+            chart1.Series[1].Points.Clear(); // Очистка графика значений счетчика
         }
 
+        // Обработчик события нажатия кнопки "Рассчитать"
         private void button_res_Click(object sender, EventArgs e)
         {
-            if (ValidationInput())
+            if (ValidationInput()) // Проверка корректности введенных данных
             {
-                chart1.Series[0].Points.Clear();
-                chart1.Series[1].Points.Clear();
+                chart1.Series[0].Points.Clear(); // Очистка графика вероятностей
+                chart1.Series[1].Points.Clear(); // Очистка графика значений счетчика
 
                 List<int> hits = new List<int>();
                 for (int i = 0; i < _numberExperiments; i++)
@@ -34,7 +35,7 @@ namespace Laba3
                     hits.Add(hitCount);
                 }
 
-                int maxHits = hits.Max();
+                int maxHits = hits.Max(); // Наибольшее количество отказов в одном эксперименте
                 List<double> list = new List<double>();
 
                 for (int i = 0; i < maxHits; i++)
@@ -45,9 +46,9 @@ namespace Laba3
 
                 for (int i = 0; i < maxHits; i++)
                 {
-                    chart1.Series[0].Points.AddXY(i, list[i]);
-                    double counter = CalculateCounter(i); // Вычисление значения "counter"
-                    chart1.Series[1].Points.AddXY(i, counter);
+                    chart1.Series[0].Points.AddXY(i, list[i]); // Добавление точек на график вероятностей
+                    double counter = CalculateCounter(i); // Вычисление значения счетчика
+                    chart1.Series[1].Points.AddXY(i, counter); // Добавление точек на график счетчика
                 }
             }
         }
@@ -67,7 +68,7 @@ namespace Laba3
             return hitCount;
         }
 
-        // Метод для вычисления значения "counter"
+        // Метод для вычисления значения счетчика
         private double CalculateCounter(int i)
         {
             return (Math.Pow(_failureRate * _time, i) / Factorial(i)) * Math.Exp(-_failureRate * _time);
@@ -81,7 +82,7 @@ namespace Laba3
                 MessageBox.Show("Некорректное значение для поля Время");
                 return false;
             }
-            else 
+            else
             {
                 _time = Math.Abs(_time);
                 if (_time > 1)
@@ -95,10 +96,10 @@ namespace Laba3
                 MessageBox.Show("Некорректное значение для поля Интенсивность отказов");
                 return false;
             }
-            else 
+            else
             {
                 _failureRate = Math.Abs(_failureRate);
-                if (_failureRate>35) 
+                if (_failureRate > 35)
                 {
                     MessageBox.Show("Интенсивность отказов вне диаппазона допустимых значений");
                     return false;
@@ -109,7 +110,7 @@ namespace Laba3
                 MessageBox.Show("Некорректное значение для поля Количество испытаний");
                 return false;
             }
-            else 
+            else
             {
                 _numberExperiments = Math.Abs(_numberExperiments);
             }
