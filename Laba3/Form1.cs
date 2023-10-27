@@ -85,11 +85,6 @@ namespace Laba3
             else
             {
                 _time = Math.Abs(_time);
-                if (_time > 1)
-                {
-                    MessageBox.Show("Время вне диаппазона допустимых значений");
-                    return false;
-                }
             }
             if (!double.TryParse(textBox_FailureRate.Text, out _failureRate))
             {
