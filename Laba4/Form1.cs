@@ -101,22 +101,7 @@ namespace Laba4
             probabilitys.Add(probability);
             double.TryParse(textBox8.Text, out probability);
             probabilitys.Add(probability);
-            double.TryParse(textBox9.Text, out probability);
-            probabilitys.Add(probability);
-            double.TryParse(textBox10.Text, out probability);
-            probabilitys.Add(probability);
-            double.TryParse(textBox11.Text, out probability);
-            probabilitys.Add(probability);
-            double.TryParse(textBox12.Text, out probability);
-            probabilitys.Add(probability);
-            double.TryParse(textBox13.Text, out probability);
-            probabilitys.Add(probability);
-            double.TryParse(textBox14.Text, out probability);
-            probabilitys.Add(probability);
-            double.TryParse(textBox15.Text, out probability);
-            probabilitys.Add(probability);
-            double.TryParse(textBox16.Text, out probability);
-            probabilitys.Add(probability);
+
 
             return probabilitys;
         }
